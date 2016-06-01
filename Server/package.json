@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "babel app --out-dir dist -w",
+    "build": "babel app --out-dir dist",
     "start": "node dist/server.js"
   },
   "author": "",
