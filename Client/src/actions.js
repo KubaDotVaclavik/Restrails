@@ -1,39 +1,72 @@
-export const ADD_TODO = 'ADD_TODO';
-export const TOGGLE_TODO = 'TOGGLE_TODO';
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
+import fetch from 'isomorphic-fetch'
 
-export const VisibilityFilters = {
-    SHOW_ALL: 'SHOW_ALL',
-    SHOW_COMPLETED: 'SHOW_COMPLETED',
-    SHOW_ACTIVE: 'SHOW_ACTIVE',
-}
+export const REQUEST_POSTS = 'REQUEST_POST'
+export const RECEIVE_POSTS = 'RECEIVE_POST'
+export const SELECT_SUBREDDIT = 'SELECT_SUBREDDIT'
+export const INVALIDATE_SUBREDDIT = 'INVALIDATE_SUBREDDIT'
 
-let nextTodoId = 0;
-
-export function addTodo (text){
+export function selectSubreddit(subreddit) {
     return {
-        type: ADD_TODO,
+        type: SELECT_SUBREDDIT,
         payload: {
-            text: text,
-            index: nextTodoId++
+            subreddit
         }
     }
 }
 
-export function toggleTodo(index){
+export function invalidateSubreddit(subreddit) {
     return {
-        type: TOGGLE_TODO,
+        type: INVALIDATE_SUBREDDIT,
         payload: {
-            index: index,
+            subreddit
         }
     }
 }
 
-export function setVisibilityFilter (filter){
+export function requestPosts(subreddit) {
     return {
-        type: SET_VISIBILITY_FILTER,
+        type: REQUEST_POSTS,
+        payload:{
+            subreddit
+        }
+    }
+}
+
+export function receiveSubreddit(subreddit, json) {
+    return {
+        type: RECEIVE_POSTS,
         payload: {
-            filter: filter,
+            subreddit,
+            posts: json.data.children.map(child => child.data),
+            receivedAt: Date.now()
+        }
+    }
+}
+
+export function fetchSubreddit(subreddit) {
+    return dispatch => {
+        dispatch(requestPosts(subreddit))
+        return fetch(`http://www.reddit.com/r/${subreddit}.json`)
+        .then(response => response.json())
+        .then(json => dispatch(receiveSubreddit(subreddit, json)))
+    }
+}
+
+function shouldFetchPosts(state, subreddit){
+    const posts = state.postsBySubreddit[subreddit]
+    if(!posts){
+        return true
+    }else if(posts.isFetching){
+        return false
+    }else{
+        return posts.didInvalidate
+    }
+}
+
+export function fetchPostsIfNeeded(subreddit){
+    return (dispatch, getState) => {
+        if(shouldFetchPosts(getState(), subreddit)) {
+            return dispatch(fetchSubreddit(subreddit))
         }
     }
 }
