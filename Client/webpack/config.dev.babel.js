@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import path from 'path';
 import ip from 'ip';
 import {HOT_RELOAD_PORT, SRC_DIR, BUILD_DIR} from './constants';
+import alias from './alias'
 
 export default {
     hotPort: HOT_RELOAD_PORT,
@@ -51,7 +52,9 @@ export default {
         new webpack.NoErrorsPlugin()
     ],
     resolve: {
-        extensions: ['', '.js', '.json'],
+        extensions: ['', '.js', '.json', '.less'],
         modulesDirectories: ['src', 'node_modules'],
+        root: path.resolve(SRC_DIR),
+        alias: alias,
     }
 };

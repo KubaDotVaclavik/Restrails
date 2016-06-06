@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { selectSubreddit, fetchPostsIfNeeded, invalidateSubreddit } from '../actions'
-import Picker from '../components/Picker'
-import Posts from '../components/Posts'
+import AppRoot from "AppRoot"
 
-class AsyncApp extends Component {
+import 'appLess'
+
+class App extends Component {
     constructor(props){
         super(props)
         this.handleChange = this.handleChange.bind(this)
@@ -37,44 +38,16 @@ class AsyncApp extends Component {
     
     render(){
         const {selectedSubreddit, posts, isFetching, lastUpdate} = this.props
-        
+
         return (
-            <div>
-            <Picker value={selectedSubreddit}
-            onChange={this.handleChange}
-            options={['reactjs', 'frontend', 'funny']} />
-            <p>
-            {
-                lastUpdate &&
-                <span>
-                Last update at {new Date(lastUpdate).toLocaleString()}.
-                </span>
-            }
-            {
-                !isFetching &&
-                <a onClick={this.handleRefreshClick}> Refresh </a>
-            }
-            </p>
-            {
-                isFetching && posts.length === 0 &&
-                <h2>Loading...</h2>
-            }
-            {
-                !isFetching && posts.length === 0 &&
-                <h2>Empty</h2>
-            }
-            {
-                posts.length > 0 &&
-                <div style={{opacity: isFetching ? 0.5 : 1}}>
-                    <Posts posts={posts} />
-                </div>
-            }
+            <div id="app" >
+            <AppRoot/>
             </div>
         )
     }
 }
 
-AsyncApp.propTypes = {
+App.propTypes = {
     selectedSubreddit: PropTypes.string.isRequired,
     posts: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
@@ -90,4 +63,4 @@ function mapStateToProps(state){
     return { selectedSubreddit, posts, isFetching, lastUpdate}
 }
 
-export default connect(mapStateToProps)(AsyncApp)
+export default connect(mapStateToProps)(App)
