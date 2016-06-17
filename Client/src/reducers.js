@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux'
 import {
-    REQUEST_POSTS, 
-    RECEIVE_POSTS, 
-    SELECT_SUBREDDIT,
-    INVALIDATE_SUBREDDIT
+    ADD_ITEM, 
+    ADD_TAG
 } from './actions'
 
 function selectedSubreddit(state = 'reactjs', action){
@@ -51,9 +49,32 @@ function postsBySubreddit(state = {}, action) {
     }
 }
 
-const rootReducer = combineReducers({
-    postsBySubreddit,
-    selectedSubreddit
-})
+// const rootReducer2 = combineReducers({
+//     entities,
+//     selectedSubreddit
+// })
+function entities(state = {}, action){
+    switch(action.type){
+        case ADD_ITEM:
+        case ADD_TAG:
+            return Object.assign({}, state, {
+                entities: entities(state.entities, action)
+            })
+        default:
+            return state;
+    }
+}
+
+const rootReducer = function(state = {}, action){
+    switch(action.type){
+        case ADD_ITEM:
+        case ADD_TAG:
+            return Object.assign({}, state, {
+                entities: entities(state.entities, action)
+            })
+        default:
+            return state;
+    }
+}
 
 export default rootReducer 
