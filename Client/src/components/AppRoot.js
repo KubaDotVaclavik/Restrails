@@ -32,7 +32,7 @@ class AppRoot extends Component {
             {title: "Summary", content: "summary"}
         ]
         const containerHeight = `calc(100% - ${64}px )`
-        const viewsHeight = `calc(100% - ${48}px )`
+        const viewsHeight = `calc(100% - ${112}px )`
         
         return (
             <div style={{height: "100%"}}>
@@ -56,19 +56,40 @@ class AppRoot extends Component {
             </div>
             <SwipeableViews
             style={{height: viewsHeight}}
+            className="swipeable-views-container"
             index={this.state.slideIndex}
             onChangeIndex={this.handleChange} 
+            containerStyle={{height: '100%'}}
+            slideStyle={{}}
             >
-            {
-                contents.map((item, idx) =>{
-                    return (
-                    <div key={idx} style={{height: "100%"}}>
-                    
-                    <h2>{item.content}</h2><h2>{item.content}</h2><h2>{item.content}</h2><h2>{item.content}</h2>
-                    </div>
-                    )
-                })
-            }
+                <div key={0}>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                    <h1>aaaaa</h1>
+                </div>
+                <div key={1}>
+                    <h1>bbbbbb</h1>
+                    <h1>bbbbbb</h1>
+                    <h1>bbbbbb</h1>
+                    <h1>bbbbbb</h1>
+                    <h1>bbbbbb</h1>
+                    <h1>bbbbbb</h1>
+                </div>
             </SwipeableViews >
             </div>
         )
