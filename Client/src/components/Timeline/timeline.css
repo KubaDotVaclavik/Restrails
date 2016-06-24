@@ -1,0 +1,37 @@
+.day{
+    height: 350px;
+}
+
+.timelineContainer{
+    display: flex
+}
+
+.timerulerContainer{
+    order: 1;
+    width: 130px;
+}
+
+.timesliderContainer{
+    order: 2;
+    width: 1px;
+    background-color: #7a7a7a
+}
+
+.hour{
+    height: 40px;
+    color: #aaa;
+    line-height: 40px;
+    text-align: center;
+}
+
+.slidersWrapper{
+    height: 100%;
+    position: relative;
+}
+
+.slidersNode{
+    height: 10px;
+    width: 10px;
+    background-color: #7a7a7a;
+    position: absolute;
+}

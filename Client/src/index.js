@@ -7,35 +7,40 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import {Provider} from 'react-redux'
 import configureStore from './configureStore' 
-import App from './containers/App'
+import AppRoot from "AppRoot"
 
 // Needed for onTouchTap 
 // http://stackoverflow.com/a/34015469/988941 
 injectTapEventPlugin();
 
-const store = configureStore()
-const appRoot = document.getElementById('app-root')
+const defaultData = {
+    timeFrame: Date.now()
+}
+
+const store = configureStore(defaultData)
+const appElement = document.getElementById('app-root')
 
 
 render(
   <Provider store={store}>
     <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <App />
+        <AppRoot />
     </MuiThemeProvider>
   </Provider>,
-  appRoot
+  appElement
 )
 
 if (module.hot) {
-    module.hot.accept('./containers/App', () => {
-        let NewApp = require('./containers/App').default; // eslint-disable-line
+    module.hot.accept('./components/AppRoot', () => {
+        console.log('new app')
+        let NewApp = require('./components/AppRoot').default; // eslint-disable-line
         render(
             <Provider store={store}>
                 <MuiThemeProvider muiTheme={getMuiTheme()}>
                     <NewApp />
                 </MuiThemeProvider>
             </Provider>,
-            appRoot
+            appElement
         )
     });
 }

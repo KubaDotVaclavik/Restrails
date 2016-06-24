@@ -33,7 +33,15 @@ export default {
             {
                 test: /\.less$/,
                 loader: 'style-loader!css-loader!less-loader',
-            }
+            },
+            {
+                test: /\.css$/,
+                loaders: [
+                    'style-loader',
+                    'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]--[hash:base64:5]',
+                    'postcss-loader',
+                ],
+            },
         ]
     },
     output:{

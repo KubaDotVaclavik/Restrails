@@ -1,59 +1,24 @@
 import { combineReducers } from 'redux'
-import {
-    REQUEST_POSTS, 
-    RECEIVE_POSTS, 
-    SELECT_SUBREDDIT,
-    INVALIDATE_SUBREDDIT
-} from './actions'
+import {reducer as timeCards} from './components/TimeLine/index'
 
-function selectedSubreddit(state = 'reactjs', action){
+import {TIME_TICK} from './actions'
+
+function timeFrame(state = 0, action){
     switch(action.type){
-        case SELECT_SUBREDDIT:
-            return action.payload.subreddit;
+        case(TIME_TICK):
+            return action.payload.now;
         default:
             return state;
     }
 }
 
-function posts(state = {isFetching: false, didInvalidate: false, items: []}, action){
-    switch(action.type){
-        case INVALIDATE_SUBREDDIT:
-            return Object.assign({}, state, {
-                didInvalidate: true
-            });
-        case REQUEST_POSTS:
-            return Object.assign({}, state, {
-                isFetching: true,
-                didInvalidate: false
-            })
-        case RECEIVE_POSTS:
-            return Object.assign({}, state, {
-                isFetching: false,
-                didInvalidate: false,
-                items: action.payload.posts,
-                lastUpdate: action.payload.receivedAt,
-            })        
-        default:
-            return state;
-    }
-}
-
-function postsBySubreddit(state = {}, action) {
-    switch(action.type){
-        case REQUEST_POSTS:
-        case RECEIVE_POSTS:
-        case INVALIDATE_SUBREDDIT:
-            return Object.assign({}, state, {
-                [action.payload.subreddit] : posts(state[action.payload.subreddit], action)
-            })
-        default:
-            return state
-    }
-}
+const entities = combineReducers({
+    timeCards
+})
 
 const rootReducer = combineReducers({
-    postsBySubreddit,
-    selectedSubreddit
+    timeFrame,
+    entities
 })
 
 export default rootReducer 

@@ -1,4 +1,6 @@
 {
     "AppRoot": "components/AppRoot",
-    "appLess" : "less/app"
+    "appLess" : "less/app",
+    
+    "strings" : "const/strings"
 }

@@ -5,6 +5,10 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 // From https://github.com/oliviertassinari/react-swipeable-views
 import SwipeableViews from 'react-swipeable-views';
 
+import 'appLess'
+
+import {Timeline} from './Timeline/index'
+
 const styles = {
     appBar: {
         boxShadow: 'none'
@@ -31,7 +35,6 @@ class AppRoot extends Component {
             {title: "Timeline", content : "timeline"},
             {title: "Summary", content: "summary"}
         ]
-        const containerHeight = `calc(100% - ${64}px )`
         const viewsHeight = `calc(100% - ${112}px )`
         
         return (
@@ -43,16 +46,15 @@ class AppRoot extends Component {
             title="Restrails"
             iconClassNameRight="muidocs-icon-navigation-expand-more"
             />
+            
             <Tabs 
             className="app-tabs"
             value={this.state.slideIndex} 
             onChange={this.handleChange}>
-            {
-                contents.map((item, idx) =>{
-                    return <Tab label={item.title} value={idx} key={idx}/>
-                })
-            }
+                <Tab label='Timeline' value={0}></Tab>
+                <Tab label='Summary' value={1}></Tab>
             </Tabs>
+            
             </div>
             <SwipeableViews
             style={{height: viewsHeight}}
@@ -62,26 +64,9 @@ class AppRoot extends Component {
             containerStyle={{height: '100%'}}
             slideStyle={{}}
             >
-                <div key={0}>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                    <h1>aaaaa</h1>
-                </div>
+                
+                    <Timeline key={0}/>
+                
                 <div key={1}>
                     <h1>bbbbbb</h1>
                     <h1>bbbbbb</h1>
