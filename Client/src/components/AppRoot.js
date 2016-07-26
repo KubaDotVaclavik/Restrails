@@ -5,9 +5,11 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 // From https://github.com/oliviertassinari/react-swipeable-views
 import SwipeableViews from 'react-swipeable-views';
 
+import rootStyles from './css/rootStyles.css'
 import 'appLess'
 
 import {Timeline} from './Timeline/index'
+import {AddBtn} from './AddBtn/index'
 
 const styles = {
     appBar: {
@@ -38,7 +40,7 @@ class AppRoot extends Component {
         const viewsHeight = `calc(100% - ${112}px )`
         
         return (
-            <div style={{height: "100%"}}>
+            <div className={`${rootStyles.root} ${rootStyles.reset}`}>
             <div style={{backgroundColor: this.props.muiTheme.palette.primary1Color}}>
             <AppBar
             className="app-bar"
@@ -65,7 +67,9 @@ class AppRoot extends Component {
             slideStyle={{}}
             >
                 
-                    <Timeline key={0}/>
+                    <Timeline key={0}>
+                        <AddBtn />
+                    </Timeline>
                 
                 <div key={1}>
                     <h1>bbbbbb</h1>

@@ -1,0 +1,9 @@
+.root{
+    font-family: Roboto, sans-serif;
+    height: 100%;
+    background-color: #fff;
+}
+
+.reset :global *{
+    box-sizing: border-box;
+}

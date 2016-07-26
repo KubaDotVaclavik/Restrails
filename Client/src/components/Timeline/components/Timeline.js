@@ -1,14 +1,15 @@
 import React from 'react'
 import TimeRuler from './TimeRuler'
+import {TimeCards} from '../../TimeCards'
 import Sliders from './Sliders'
 import styles from '../timeline.css'
 
-export default ({firstDay, onDayClick, timeCards}) => <div className={styles.timelineContainer}>
+export default ({firstDay, onDayClick, timeCards, children}) => <div className={styles.timelineContainer}>
     <div className={styles.timerulerContainer}>
-    <TimeRuler 
-    firstDay={firstDay}
-    onDayClick={onDayClick}
-    />
+        <TimeRuler 
+        firstDay={firstDay}
+        onDayClick={onDayClick}
+        />
     </div>
     
     <div className={styles.timesliderContainer}>
@@ -19,6 +20,10 @@ export default ({firstDay, onDayClick, timeCards}) => <div className={styles.tim
     </div>
     
     <div style={{order: '3',     flexGrow: '1'}}>
-        <h1>{firstDay.getDate()} </h1>
+        <TimeCards/>
+
     </div>
+    
+    {children}
+
 </div>

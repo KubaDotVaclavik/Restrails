@@ -3,3 +3,7 @@ export const DAYS = {
     en: ['sunday', 'monday' ,'tuesday','wednesday','thursday','friday','saturday' ] 
 }
 
+export const STATES = {
+    work :{cz : 'Práce', en: 'Work'}, 
+    sleep :{cz : 'Spánek', en: 'Sleep'}, 
+}

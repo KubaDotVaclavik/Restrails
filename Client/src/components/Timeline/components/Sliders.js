@@ -21,13 +21,14 @@ export default class Sliders extends Component {
         const parentHeight = this.state.parentNode.clientHeight
         const weekTime = 7 * 24 * 60 * 60 * 1000
         const d = new Date(firstDay)
-        d.setHours(24); d.setMinutes(0); d.setSeconds(0); d.setMilliseconds(0)
+        d.setHours(0,0,0,0);
         const firstTime = d.getTime()
         
         const sliders = timeCards.map((t, i) => {
             return {
                 endPosition: (firstTime - t.endTime.getTime()) / weekTime * parentHeight,
-                startPosition: (firstTime - t.startTime.getTime()) / weekTime * parentHeight
+                startPosition: (firstTime - t.startTime.getTime()) / weekTime * parentHeight,
+                id: t.id
             }
         })
         
@@ -35,7 +36,12 @@ export default class Sliders extends Component {
             
             <div className={styles.slidersWrapper}>
             {
-                sliders.map(t => <div className={styles.slidersNode} style={{top: t.startPosition}}/>)
+                sliders.map(t => <div key={t.id}>
+                    <div className={styles.slidersNode} style={{top: t.startPosition}}/>
+                    <div className={styles.slidersNode} style={{top: t.endPosition}}/>
+                    <div className={styles.slidersEdge} style={{top: t.endPosition, bottom: parentHeight - t.startPosition}} />
+                </div>
+                )
             }
             </div>
         )

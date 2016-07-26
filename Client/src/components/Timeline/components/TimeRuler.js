@@ -38,7 +38,18 @@ export default class TimeRuller extends Component {
         }
         
         for(var i = 5; i > -1; i-- ){
-            hours.push(<div key={i} className={styles.hour}>{`${i * 4} : 00`}</div>)
+            hours.push(
+                <div key={i} className={styles.hourWrapper}>
+                {
+                    (i !== 0) ? 
+                        <div className={styles.hour}>
+                        {`${i * 4} : 00`}
+                        </div>
+                        : ''
+                }
+                </div>
+                
+                )
         }
         
         return(
@@ -47,8 +58,10 @@ export default class TimeRuller extends Component {
             >
                 {days.map((date, idx) => 
                     <div key={idx}
+                    className={styles.day}
                     data-date={new Date(date).getTime()}
                     onClick={this.onDayClick}>
+                    <div className={styles.dayTitle}>{DAYS.en[date.getDay()]}</div>
                     {hours}
                     </div>
                 )}

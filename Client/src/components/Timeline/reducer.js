@@ -11,6 +11,7 @@ const timeCard = (state, action) => {
                 id: p.id,
                 startTime: p.startTime || null,
                 endTime: p.endTime || null,
+                type: p.type || null
             }
         case MOVE_START:
             if(state.id !== p.id) return state;

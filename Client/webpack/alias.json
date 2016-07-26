@@ -2,5 +2,8 @@
     "AppRoot": "components/AppRoot",
     "appLess" : "less/app",
     
-    "strings" : "const/strings"
+    "strings" : "const/strings",
+    "utils" : "utils",
+
+    "variables": "components/css/variables.css"
 }

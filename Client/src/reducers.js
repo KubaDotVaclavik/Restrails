@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import {reducer as timeCards} from './components/TimeLine/index'
+import {reducer as timeCards} from './components/Timeline/index'
 
 import {TIME_TICK} from './actions'
 
